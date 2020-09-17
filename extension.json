@@ -1,0 +1,34 @@
+{
+  "identifier": "wakatime.timetracker",
+  "name": "WakaTime",
+  "organization": "WakaTime",
+  "vendor": "WakaTime",
+  "description": "Metrics, insights, and time tracking automatically generated from your programming activity.",
+  "version": "1.0.0",
+  "categories": [],
+  "repository": "https://github.com/wakatime/WakaTime.novaextension",
+  "bugs": "https://github.com/wakatime/WakaTime.novaextension/issues",
+  "main": "main.js",
+  "activationEvents": ["*"],
+  "entitlements": {
+    "filesystem": "readwrite",
+    "process": true,
+    "requests": true
+  },
+  "commands": {
+    "extensions": [
+      {
+        "title": "Dashboard",
+        "command": "wakatime.dashboard"
+      },
+      {
+        "title": "API Key",
+        "command": "wakatime.apikey"
+      },
+      {
+        "title": "Debug Mode",
+        "command": "wakatime.debug"
+      }
+    ]
+  }
+}
