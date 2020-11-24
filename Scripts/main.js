@@ -308,16 +308,38 @@ function onEvent(editor, isWrite) {
 
   let time = Date.now();
   if (isWrite || enoughTimePassed(time) || lastFile !== file) {
-    sendHeartbeat(file, isWrite);
+    sendHeartbeat(file, isWrite, doc.syntax, getLocalFileIfRemote(doc));
     lastFile = file;
     lastHeartbeat = time;
   }
 }
 
-function sendHeartbeat(file, isWrite) {
+function getLocalFileIfRemote(doc) {
+  if (!doc.isRemote) return null;
+
+  const trimmedRange = new Range(0, doc.length > 128000 ? 128000 : doc.length);
+  const buffer = doc.getTextInRange(trimmedRange);
+
+  const tempFile = '/tmp/' + Date.now();
+  const fh = nova.fs.open(tempFile, 'w');
+  fh.write(buffer);
+  fh.close();
+
+  return tempFile;
+}
+
+function sendHeartbeat(file, isWrite, language, localFile) {
   const user_agent = 'nova/' + nova.versionString + ' nova-wakatime/' + nova.extension.version;
   let args = ['--file', file.quote(), '--plugin', user_agent.quote()];
   if (isWrite) args.push('--write');
+  if (language) {
+    args.push('--language');
+    args.push(language.quote());
+  }
+  if (localFile) {
+    args.push('--local-file');
+    args.push(localFile.quote());
+  }
   const binary = cliPath();
 
   log.debug('Sending heartbeat:\n' + formatArguments(binary, args));
@@ -355,6 +377,7 @@ function sendHeartbeat(file, isWrite) {
         );
       }
     }
+    if (localFile) nova.fs.remove(localFile);
   });
   process.start();
 }
