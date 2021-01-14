@@ -1,3 +1,8 @@
+## Version 2.0.1 (Released 2021-01-14)
+
+Bugfix error when reading config file that doesn't yet exist on filesystem.
+[#5](https://github.com/wakatime/WakaTime.novaextension/issues/5)
+
 ## Version 2.0.0 (Released 2020-11-24)
 
 Support for remote files.
