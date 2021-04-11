@@ -4,7 +4,7 @@
   "organization": "WakaTime",
   "vendor": "WakaTime",
   "description": "Metrics, insights, and time tracking automatically generated from your programming activity.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "categories": [],
   "repository": "https://github.com/wakatime/WakaTime.novaextension",
   "bugs": "https://github.com/wakatime/WakaTime.novaextension/issues",
