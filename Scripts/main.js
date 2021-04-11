@@ -192,12 +192,15 @@ function cliPath() {
 }
 
 function getSetting(section, key) {
+  let lines = [];
   try {
     const config = nova.fs.open(getConfigFile(), 'r', 'utf-8');
+    lines = config.readlines();
+    config.close();
   } catch (e) {
     return '';
   }
-  const lines = config.readlines();
+  if (!lines || lines.length == 0) return '';
   let currentSection = '';
   for (var i = 0; i < lines.length; i++) {
     let line = lines[i];
@@ -210,23 +213,21 @@ function getSetting(section, key) {
       let parts = line.split('=');
       const currentKey = parts[0].trim();
       if (currentKey === key && parts.length > 1) {
-        config.close();
         return parts[1].trim();
       }
     }
   }
 
-  config.close();
   return '';
 }
 
 function setSetting(section, key, val) {
+  let lines = [];
   try {
     const config = nova.fs.open(getConfigFile(), 'r', 'utf-8');
-    const lines = config.readlines();
-  } catch (e) {
-    const lines = [];
-  }
+    lines = config.readlines();
+    config.close();
+  } catch (e) { }
 
   let contents = [];
   let currentSection = '';
