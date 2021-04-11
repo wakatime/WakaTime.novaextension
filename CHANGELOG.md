@@ -1,3 +1,8 @@
+## Version 2.0.2 (Released 2021-04-11)
+
+Bugfix error when trying to enter API Key after initial config.
+[#7](https://github.com/wakatime/WakaTime.novaextension/issues/7)
+
 ## Version 2.0.1 (Released 2021-01-14)
 
 Bugfix error when reading config file that doesn't yet exist on filesystem.
