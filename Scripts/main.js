@@ -371,7 +371,7 @@ function sendHeartbeat(file, isWrite, language, localFile) {
       if (stderr.length > 0) log.error(stderr.join('\n'));
       if (stdout.length > 0) log.error(stdout.join('\n'));
       if (exitCode == 102) {
-        log.warn('Api eror (102); Check your ~/.wakatime.log file for more details.');
+        log.debug('Offline (102); Working in offline mode. More details in your ~/.wakatime.cfg file.');
       } else if (exitCode == 103) {
         log.error('Config parsing error (103); Check your ~/.wakatime.log file for more details.');
       } else if (exitCode == 104) {
