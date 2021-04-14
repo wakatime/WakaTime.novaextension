@@ -357,12 +357,16 @@ function sendHeartbeat(file, isWrite, language, localFile) {
   var process = new Process(binary, options);
   var stderr = [];
   var stdout = [];
-  process.onStderr(function (line) {
-    stderr.push(line);
-  });
-  process.onStdout(function (line) {
-    stdout.push(line);
-  });
+  try {
+    process.onStderr(function (line) {
+      stderr.push(line);
+    });
+    process.onStdout(function (line) {
+      stdout.push(line);
+    });
+  } catch (e) {
+    log.warn(e);
+  }
   process.onDidExit(exitCode => {
     if (exitCode == 0) {
       let today = new Date();
