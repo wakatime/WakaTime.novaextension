@@ -1,3 +1,8 @@
+## Version 2.0.3 (Released 2021-04-14)
+
+Bugfix catch and log error when attaching stdout/err listener to wakatime-cli child process.
+[#10](https://github.com/wakatime/WakaTime.novaextension/issues/10)
+
 ## Version 2.0.2 (Released 2021-04-11)
 
 Bugfix error when trying to enter API Key after initial config.
