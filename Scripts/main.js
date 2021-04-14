@@ -227,7 +227,7 @@ function setSetting(section, key, val) {
     const config = nova.fs.open(getConfigFile(), 'r', 'utf-8');
     lines = config.readlines();
     config.close();
-  } catch (e) { }
+  } catch (e) {}
 
   let contents = [];
   let currentSection = '';
@@ -375,7 +375,9 @@ function sendHeartbeat(file, isWrite, language, localFile) {
       if (stderr.length > 0) log.error(stderr.join('\n'));
       if (stdout.length > 0) log.error(stdout.join('\n'));
       if (exitCode == 102) {
-        log.debug('Offline (102); Working in offline mode. More details in your ~/.wakatime.cfg file.');
+        log.debug(
+          'Offline (102); Working in offline mode. More details in your ~/.wakatime.cfg file.',
+        );
       } else if (exitCode == 103) {
         log.error('Config parsing error (103); Check your ~/.wakatime.log file for more details.');
       } else if (exitCode == 104) {
